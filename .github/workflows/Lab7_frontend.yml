@@ -49,8 +49,7 @@ jobs:
           context: ./
           file: ./dockerfile.v1
           push: true
-          tags: |
-            ##################################### 
+          tags: lab7.v1
       
       #Przenies cache'a
       - name: Move cache
