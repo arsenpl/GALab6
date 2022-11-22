@@ -16,11 +16,11 @@ jobs:
       #Skonfigurowanie dockera + buildx
       - name: Buildx set-up
         id: buildx
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v2.2.1
         
       #Instalacja QEMU
       - name: Docker Setup QEMU
-        uses: docker/setup-qemu-action@v2
+        uses: docker/setup-qemu-action@v2.1.0
 
       #Konfiguracja cachowania
       - name: Cache Docker layers
@@ -33,7 +33,7 @@ jobs:
 
       #Logowanie do Dockerhuba
       - name: Login to DockerHub
-        uses: docker/setup-buildx-action@v2
+        uses: docker/setup-buildx-action@v2.1.0
         with:
           username: ${{secrets.DOCKER_HUB_USERNAME}}
           password: ${{secrets.DOCKER_HUB_ACCESS_TOKEN}}
@@ -46,10 +46,10 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           platforms: linux/arm/v7,linux/arm64/v8,linux/amd64 
-          context: ./
-          file: ./dockerfile.v1
+          context: .
+          file: Dockerfile
           push: true
-          tags: lab7.v1
+          tags: ${{secrets.DOCKER_HUB_USERNAME}}/lab7:v1
       
       #Przenies cache'a
       - name: Move cache
