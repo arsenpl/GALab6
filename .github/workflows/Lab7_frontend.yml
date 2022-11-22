@@ -46,10 +46,11 @@ jobs:
           cache-from: type=local,src=/tmp/.buildx-cache
           cache-to: type=local,dest=/tmp/.buildx-cache-new,mode=max
           platforms: linux/s390x,linux/amd64 ,linux/arm64 
-          context: .
-          file: Dockerfile
+          context: ./
+          file: ./Dockerfile
           push: true
-          tags: ${{secrets.DOCKER_HUB_USERNAME}}/lab7:v1
+          tags: |
+            ${{secrets.DOCKER_HUB_USERNAME}}/lab7:v1
       
       #Przenies cache'a
       - name: Move cache
